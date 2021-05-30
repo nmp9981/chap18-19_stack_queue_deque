@@ -1,0 +1,23 @@
+import sys
+
+#스택 구현(0 입력시 가장 위에것 지우기)
+def stack(m, money):
+  if m == 0 and len(money) >= 1:
+    l = len(money)-1
+    money.pop(l)
+  elif m == 0:
+    pass
+  else:
+    money.append(m)
+  
+  return money
+
+#입력
+k = int(input())
+money = []
+for i in range(0, k):
+  m = int(sys.stdin.readline())
+  money = stack(m, money)
+
+#돈의 합
+print(sum(money))
