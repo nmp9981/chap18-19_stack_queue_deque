@@ -1,0 +1,28 @@
+#VPS판정
+#stack으로 구현
+def vps(s):
+  count = 0
+  l = len(s) - 1#맨 위 원소부터 확인
+  while l >= 0:
+    #입력에 따라
+    if s[l] == "(":
+      count += 1
+    else:
+      count -= 1
+    
+    #.....( 상활일 때
+    if s[l] == "(" and count == 1:
+        print("NO")
+        return
+    l -= 1
+  
+  if count != 0:#괄호의 수가 다르다
+    print("NO")
+  else:#괄호의 수가 
+    print("YES")
+
+#입력
+t = int(input())
+for i in range(0,t):
+  s = input()
+  vps(s)
