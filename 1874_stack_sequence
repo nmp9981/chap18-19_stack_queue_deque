@@ -1,0 +1,53 @@
+#스택 수열
+def seq(li):
+  count_plus = 0
+  count_minus = 0
+  count = []
+  #처음부분
+  for i in range(li[0]):
+    count.append("+")
+    
+  maxi = li[0]
+  count_plus += li[0]
+  count.append("-")
+  count_minus += 1
+
+  #두번째부터
+  for j in range(1,len(li)):
+    if li[j-1] > li[j]:#감소
+      count.append("-")
+      count_minus += 1
+    else:#증가
+      add = abs(li[j]-maxi)
+      for i in range(add):
+        count.append("+")
+      count_plus += add
+
+      if j != len(li) - 1:#마지막항이 아닐때
+        count.append("-")
+        count_minus += 1
+
+      #maxi갱신(+개수 판정 위해서)
+      if li[j] > maxi:
+        maxi = li[j]
+
+  #스택 수열 성립 유무
+  if count_minus != count_plus:#성립x
+    return -1
+  else:#성립
+    return count
+
+#입력
+t = int(input())
+li = []
+for i in range(0,t):
+  n = int(input())
+  li.append(n)
+
+#출력
+count = seq(li)
+if count == -1:
+  print("NO")
+else:
+  for i in range(0,len(count)):
+    print(count[i])
