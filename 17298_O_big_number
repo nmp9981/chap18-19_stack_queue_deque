@@ -1,0 +1,24 @@
+import sys
+#오큰수
+def onum(li):
+  o = [-1]*len(li)#오큰수
+  stack = [0]#인덱스
+  index = 1
+  while stack and index < len(li):#스택에 값이 있고 index < n
+    while stack and li[stack[-1]] < li[index]:#다음 수가 더 크면
+      o[stack[-1]] = li[index] #o리스트에 해당 인덱스 값 저장
+      stack.pop()#오큰수를 찾은 인덱스는 pop
+    
+    stack.append(index)#다음으로
+    index += 1
+  
+  #출력
+  for i in range(0,len(o)):
+    print(o[i],end=" ")
+
+
+#입력
+n = int(input())
+#li = list(map(int,sys.stdin.readline().split()))
+li = list(map(int,input().split()))
+onum(li)
