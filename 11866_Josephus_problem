@@ -1,0 +1,36 @@
+import sys
+from collections import deque
+
+def Josephus(n,k):
+
+  #리스트 생성
+  li = deque([])
+  for j in range(1,n+1):
+    li.append(j)
+
+  rest = li#남은 사람
+  de = []
+
+  #요세푸스 순열(힌트 : 원형리스트)
+  count = 0
+  i = 0
+  while len(de) < n:#요세푸스 수열이 모두 채워질때까지
+    count += 1
+    i = rest.popleft()#앞에것 없애기
+    rest.append(i)#없앤만큼 뒤에것 추가
+    if count == k:#k번째 제거
+      d = rest.pop()#맨뒤 제거
+      de.append(d)
+      count = 0
+  
+  #출력
+  print("<",end="")
+  for i in range(0,len(de)-1):
+    print(de[i],end="")
+    print(',',end=" ")
+  print(de[-1],end="")
+  print(">",end="")
+
+#입력
+n,k = map(int,input().split())
+Josephus(n,k)
