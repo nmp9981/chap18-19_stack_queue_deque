@@ -1,0 +1,25 @@
+import sys
+from collections import deque
+
+#카드
+def card(n):
+  #리스트 생성(큐)
+  de = deque([])
+  for i in range(1,n+1):
+    de.append(i)
+  
+  i = 1#진행도(한번은 버리고 한번은 옮겨야함)
+  while len(de) > 1:#1장 남을때까지
+    if i % 2 == 1:#맨 앞장 버림
+      de.popleft()
+    else:#맨 앞장을 뒷장으로 옮기기
+      de.append(de[0])#뒤장에 추가
+      de.popleft()#맨 앞 삭제
+    i += 1
+  
+  #최종 남는 카드
+  print(de[0])
+
+#입력
+n = int(input())
+card(n)
