@@ -1,0 +1,28 @@
+from collections import deque
+def important(n,m,li):
+  
+  de = [0 for i in range(n)]
+  #큐를 이용
+  de[m] = 1#찾는것
+  count = 0#몇번째 출력
+  while True:
+    if li[0] == max(li):
+      count += 1
+      if de[0] == 1:
+        print(count)
+        break
+      else:
+        del li[0]
+        del de[0]
+    else:
+      li.append(li[0])
+      del li[0]
+      de.append(de[0])
+      del de[0]
+
+#입력
+t = int(input())
+for i in range(0,t):
+  n,m = map(int,input().split())
+  li = list(map(int,input().split()))
+  important(n,m,li)
