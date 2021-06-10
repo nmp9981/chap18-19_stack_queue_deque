@@ -1,0 +1,72 @@
+import sys
+from collections import deque
+
+#deque
+def push_front(de,y):#앞에 넣기
+  de.appendleft(y)
+
+def push_back(de,y):#뒤에 넣기
+  de.append(y)
+
+def pop_front(x):#큐 팝
+  if len(de) == 0:
+    print(-1)
+  else:
+    k = de[0]
+    de.popleft()
+    print(k)
+
+def pop_back(x):#스택 팝
+  if len(de) == 0:
+    print(-1)
+  else:
+    k = de[-1]
+    de.pop()
+    print(k)
+
+def size(x):#크기
+  print(len(de))
+
+def empty(x):#비었는가?
+  if len(de) == 0:
+    print(1)
+  else:
+    print(0)
+
+def front(x):#맨 앞수
+  if len(de) == 0:
+    print(-1)
+  else:
+    print(de[0])
+
+def back(x):#맨 뒷수
+  if len(de) == 0:
+    print(-1)
+  else:
+    print(de[-1])
+
+#입력
+de = deque([])
+n = int(input())
+for i in range(n):
+  comm = sys.stdin.readline().split()
+  s = comm[0]
+  if len(comm) == 2:#push_back 2처럼 두개를 받을 경우
+    num = comm[1]
+
+  if s == 'push_back':
+    push_back(de,num)
+  elif s == 'push_front':
+    push_front(de,num)
+  elif s == 'pop_front':
+    pop_front(de)
+  elif s == 'pop_back':
+    pop_back(de)
+  elif s == 'size':
+    size(de)
+  elif s == 'empty':
+    empty(de)
+  elif s == 'front':
+    front(de)
+  elif s == 'back':
+    back(de)
