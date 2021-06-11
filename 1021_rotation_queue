@@ -1,0 +1,35 @@
+import sys
+from collections import deque
+
+def que(li,n):
+  #리스트 추가
+  q = deque([])
+  for i in range(1,n+1):
+    q.append(i)
+  
+  #큐 회전
+  count = 0
+  while len(li) > 0:
+    if li[0] == q[0]:#첫번째 원소 뽑기(앞에것)
+      q.popleft()
+      li.popleft()
+    else:
+      if q.index(li[0]) <= len(q) - q.index(li[0]):#왼쪽 이동
+        for i in range(0,q.index(li[0])):
+          count += 1
+          k = q[0] 
+          q.append(k)
+          q.popleft()
+      else:#오른쪽 이동
+        for i in range(0,len(q) - q.index(li[0])):
+          count += 1
+          k = q[-1]
+          q.appendleft(k)
+          q.pop()
+  print(count)
+
+#입력
+n,m = map(int,input().split())
+li = list(map(int,input().split()))
+li = deque(li)
+que(li,n)
