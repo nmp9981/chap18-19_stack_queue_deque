@@ -1,0 +1,36 @@
+import sys
+input = lambda : sys.stdin.readline().strip()
+#AC
+def ac(p,li,n):
+  b = 0#뒷방향
+  f = 0#앞방향
+  r = 0#회전
+  for i in p:
+    #맨앞 빼기
+    if i == 'D': 
+      if r % 2 == 0:
+        f += 1
+      else:
+        b += 1
+    #여러번 뒤집을 필요 x
+    elif i == 'R':
+      r += 1
+    
+  #출력
+  if f + b > n:#덱에 원소가 없음
+    print('error')
+  else:
+    li = li[f:n-b]
+    if r % 2 == 1:
+      print("[" + ",".join(li[::-1]) + "]")#뒤집어서 출력
+    else:
+      print("[" + ",".join(li) + "]")
+  
+#입력
+t = int(input())#테스트 수
+for i in range(0,t):
+  p = input()
+  p = p.replace('RR','')#RR은 결과가 그대로 나옴
+  n = int(input())
+  li = input()[1:-1].split(',')
+  ac(p,li,n)
