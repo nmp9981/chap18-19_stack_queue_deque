@@ -1,0 +1,81 @@
+import sys
+import itertools
+from collections import deque
+
+#커서 왼쪽 이동
+def L(cursor):
+  if cursor == 0:
+    cursor = 0
+  else:
+    cursor -= 1
+  return cursor
+
+#커서 오른쪽 이동
+def D(s, cursor):
+  if cursor == len(s):
+    cursor = len(s)
+  else:
+    cursor += 1
+  return cursor
+
+#커서 왼쪽 문자 삭제
+def B(s, cursor):
+  ls = len(s)
+  i = 0
+  if cursor == ls:#커서가 맨끝에 있다
+    s.pop()
+    cursor -= 1
+  else:
+    while i < ls+1:
+      if cursor == i:
+        s.pop()
+        i += 1
+      else:
+        s.append(s[0])
+        s.popleft()
+        i += 1
+  return s
+
+#문자 추가
+def P(s, add, cursor):
+  ls = len(s)
+  i = 0
+  if cursor == ls:#커서가 맨끝에 있다
+    s.append(add)
+    cursor += 1
+  else:
+    while i < ls+1:
+      if cursor == i:
+        s.append(add)
+        i += 1
+      else:
+        s.append(s[0])
+        s.popleft()
+        i += 1
+  return s
+
+#입력
+s = deque(input())
+#s = sys.stdin.readline().split()
+cursor = len(s)
+n = int(input())
+for i in range(n):
+  com = list(map(str, input().split()))
+  if com[0] == 'L':
+    cursor = L(cursor)
+  elif com[0] == 'D':
+    cursor = D(s,cursor)
+  elif com[0] == 'B':
+    if cursor != 0:
+      s = B(s,cursor)
+      cursor -= 1 #함수가 s만 반환하므로 커서 위치는 따로 계산
+  elif com[0] == 'P':
+    add = com[1]
+    s = P(s, add, cursor)
+    cursor += 1
+  #print(s)
+  #print(cursor)
+
+#출력
+for i in s:
+  print(i,end='')
