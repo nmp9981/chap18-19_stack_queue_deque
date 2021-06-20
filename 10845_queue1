@@ -1,0 +1,32 @@
+import sys
+from collections import deque
+
+#입력
+t = int(input())
+de = deque([])
+for i in range(0,t):
+  comm = sys.stdin.readline().split()
+  if comm[0] == 'push':#push
+    de.append(comm[1])
+  elif comm[0] == 'pop':#pop
+    if len(de) == 0:
+      print(-1)
+    else:
+      print(de.popleft())
+  elif comm[0] == 'size':#size
+    print(len(de))
+  elif comm[0] == 'empty':#empty
+    if len(de) == 0:
+      print(1)
+    else:
+      print(0)
+  elif comm[0] == 'front':#front
+    if len(de) == 0:
+      print(-1)
+    else:
+      print(de[0])
+  elif comm[0] == 'back':#back
+    if len(de) == 0:
+      print(-1)
+    else:
+      print(de[-1])
