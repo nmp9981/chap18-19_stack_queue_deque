@@ -1,0 +1,26 @@
+import sys
+
+string = sys.stdin.readline().rstrip()
+M = int(sys.stdin.readline())
+
+l_string = list(string)
+r_string = []
+cursor = len(l_string)
+
+for _ in range(M) :
+    answer = sys.stdin.readline().rstrip().split()
+    if answer[0] == 'L' :
+        if l_string :
+            r_string.append(l_string.pop())
+    elif answer[0] == 'D' :
+        if r_string :
+            l_string.append(r_string.pop())
+    elif answer[0] == 'B' :
+        if l_string :
+            l_string.pop()
+    elif answer[0] == 'P' :
+        l_string.append(answer[1])
+r_string.reverse()
+string = l_string + r_string
+for i in string :
+    print(i, end='')
