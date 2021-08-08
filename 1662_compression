@@ -1,0 +1,33 @@
+import sys
+sys.setrecursionlimit(10**9)
+
+#압축해제
+def zip():
+  #맨앞부터 진행
+  for i in range(len(s)):
+    if s[i] == "(":
+      stack.append('(')
+    elif s[i] == ')':
+      count = 0
+      #개수세기
+      #(를 찾을때까지 진행
+      while True:
+        stack_pop = stack.pop()
+        if stack_pop == '(':
+          break
+        else:
+          count += int(stack_pop)
+      
+      stack.append(int(stack.pop())* count)#스택 갱신
+    elif s[i].isdigit() and i < len(s)-1 and s[i+1] == '(':#인덱스 범위 고려, 반례 : 4444
+      stack.append(int(s[i]))#반복횟수
+    else:#숫자
+      stack.append(1)#개수이므로
+
+  #출력
+  print(sum(stack))
+  
+#입력
+s = input()
+stack = []
+zip()
