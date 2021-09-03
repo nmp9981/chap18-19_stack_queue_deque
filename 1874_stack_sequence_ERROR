@@ -1,0 +1,73 @@
+#include <iostream>
+#include <string>
+#include <cmath>
+#include <cctype>
+#include <algorithm>
+#include <vector>
+#include <chrono>
+#include <stack>
+#include <queue>
+#include <deque>
+
+using namespace std;//이름공간 선언
+using namespace chrono;
+
+int main() {
+  cin.tie(0); //실행속도 향상
+  
+  //입력
+  int n;
+  cin>>n;
+  stack<int> p;
+
+  int li[n];
+  for(int i=0;i<n;i++){
+    cin>>li[i];
+  }
+
+  //스택수열
+  int index = 0;
+  int num = 0;
+  vector<string> result;
+  for(int i=1;i<=li[0];i++){
+    p.push(i);
+    result.push_back("+");
+    num +=1 ;//어디까지 push인가?
+  }
+  p.pop();
+  result.push_back("-");
+  while(index<n-1){
+    //다음 숫자 기준
+    //더 작은게 나오면 pop
+    if(li[index] > li[index+1]){
+      p.pop();
+      result.push_back("-");
+    }else{
+      //예외사항(넣었던 수 보다는 커야함)
+      if(num >= li[index+1]){
+        cout<<"NO"<<endl;
+        return 0;
+      }
+      //큰게 나오면 해당숫자까지 push
+      for(int i=num+1;i<=li[index+1];i++){
+        p.push(i);
+        result.push_back("+");
+        num += 1;
+      }
+      p.pop();
+      result.push_back("-");
+    }
+    index += 1;
+  }
+
+  while(!p.empty()){
+    p.pop();
+    result.push_back("-");
+  }
+
+  //출력
+  for(int i=0;i<result.size();i++){
+    cout<<result[i]<<"\n";
+  }
+  return 0;
+}
