@@ -1,0 +1,53 @@
+#include <iostream>
+#include <string>
+#include <cmath>
+#include <cctype>
+#include <algorithm>
+#include <vector>
+#include <chrono>
+#include <stack>
+#include <queue>
+#include <deque>
+
+using namespace std;//이름공간 선언
+using namespace chrono;
+
+int main() {
+  cin.tie(0); //실행속도 향상
+  
+  //입력
+  int n;
+  cin>>n;
+
+  deque<int> input;
+  for(int i=1;i<=n;i++){
+    int x;
+    cin>>x;
+    input.push_back(x);
+  }
+
+  stack<int> index;
+  int result[n];
+  //초기화
+  for(int i=0;i<n;i++){
+    result[i] = 0;
+  }
+  //탑
+  for(int i=0;i<n;i++){
+    int tower = input[i];
+    //이전보다 작음
+    while(!index.empty() && input[index.top()]<tower){
+      index.pop();
+    }
+    //수신탑 기록
+    if(!index.empty()){
+      result[i] = index.top()+1;//탑번호는 1번부터
+    }
+    index.push(i);
+  }
+  //출력
+  for(int i=0;i<n;i++){
+    cout<<result[i]<<" ";
+  }
+  return 0;
+}
