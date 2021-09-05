@@ -1,0 +1,39 @@
+#include <iostream>
+#include <string>
+#include <cmath>
+#include <cctype>
+#include <algorithm>
+#include <vector>
+#include <chrono>
+#include <stack>
+#include <queue>
+#include <deque>
+
+using namespace std;//이름공간 선언
+using namespace chrono;
+
+int main() {
+  cin.tie(0); //실행속도 향상
+  ios::sync_with_stdio(false);
+  //입력
+  int n;
+  cin>>n;
+  
+  priority_queue<int> pq;//최대힙
+  for(int i=0;i<n;i++){
+    for(int j=0;j<n;j++){
+      int x;
+      cin>>x;
+      pq.push(-x);//최소힙의 역할이 가능
+
+      //용량 초과
+      if(pq.size()>n){
+        pq.pop();//사이즈 n이 유지되게   
+      }
+    }
+  }
+  //출력
+  cout<<-pq.top()<<endl;
+  
+  return 0;
+}
